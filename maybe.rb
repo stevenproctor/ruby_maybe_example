@@ -1,23 +1,28 @@
 class Maybe
-  def self.Just(val)
-    Maybe.new(val)
-  end
 
-  def self.Nothing
-    @@nothing ||= Maybe.new(nil)
+  def self.return(val)
+    if val == nil
+      Maybe.Nothing
+    else
+      Maybe.new(val)
+    end
   end
 
   def fmap(block)
-    if self == Maybe.Nothing
-      return Maybe.Nothing
+    if self == nothing
+      return nothing
     else
-      return Maybe.Just(block.call(val))
+      return just(block.call(val))
     end
   end
 
   protected
 
   attr_reader :val
+
+  def nothing
+    @@nothing ||= Maybe.new(nil)
+  end
 
   private
 
