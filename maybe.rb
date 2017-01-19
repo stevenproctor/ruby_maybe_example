@@ -24,6 +24,15 @@ class Maybe
     end
   end
 
+  def bind(f)
+    if self == nothing
+      return nothing
+    else
+      return f.call(val)
+    end
+  end
+
+
   protected
 
   attr_reader :val
