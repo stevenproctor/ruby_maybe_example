@@ -12,7 +12,15 @@ class Maybe
     if self == nothing
       return nothing
     else
-      return just(block.call(val))
+      return Maybe.return(block.call(val))
+    end
+  end
+
+  def apply(f)
+    if f == nothing
+      return nothing
+    else
+      return fmap(f.val)
     end
   end
 
