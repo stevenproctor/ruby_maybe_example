@@ -7,6 +7,14 @@ class Maybe
     @@nothing ||= Maybe.new(nil)
   end
 
+  def fmap(block)
+    if self == Maybe.Nothing
+      return Maybe.Nothing
+    else
+      return Maybe.Just(block.call(val))
+    end
+  end
+
   protected
 
   attr_reader :val
